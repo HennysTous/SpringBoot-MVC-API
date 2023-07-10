@@ -1,0 +1,39 @@
+package com.app.web.servicio;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+import com.app.web.entidad.Usuario;
+import com.app.web.repositorio.UsuarioRepositorio;
+
+@Service
+public class UsuarioServicioImpl implements UsuarioServicio{
+
+	@Autowired
+	private UsuarioRepositorio repositorio;
+
+	@Override
+	public Usuario encontrarPorEmail(String email) {
+		// TODO Auto-generated method stub
+		return repositorio.enc;
+	}
+
+	@Override
+	public List<Usuario> encontrarUsuarioPorEmailYRespuesta(String email, String respuesta) {
+		// TODO Auto-generated method stub
+		return repositorio.encontrarUsuarioPorEmailYRespuesta(email, respuesta);
+	}
+
+	@Override
+	public List<Usuario> encontrarUsuarioPorEmailYContrasena(String email, String pass) {
+		// TODO Auto-generated method stub
+		return repositorio.encontrarUsuarioPorEmailyContrasena(email, pass);
+	}
+	
+	
+
+	
+}

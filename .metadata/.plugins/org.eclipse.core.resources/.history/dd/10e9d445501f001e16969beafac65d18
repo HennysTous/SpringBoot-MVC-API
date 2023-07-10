@@ -1,0 +1,19 @@
+package com.app.web.repositorio;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+
+import com.app.web.entidad.Usuario;
+
+public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
+
+	@Query(value = "Select * from usuarios u where u.email = :email and u.respuesta= :respuesta LIMIT 1" , nativeQuery = true)
+	Usuario encontrarUsuarioPorEmailYRespuesta(@Param("email") String email, @Param("respuesta") String respuesta);
+	
+	@Query(value = "Select * from usuarios u where u.email = :email and u.pass= :pass LIMIT 1" , nativeQuery = true)
+	Usuario encontrarUsuarioPorEmailYContrasena(@Param("email") String email, @Param("pass") String pass);
+}

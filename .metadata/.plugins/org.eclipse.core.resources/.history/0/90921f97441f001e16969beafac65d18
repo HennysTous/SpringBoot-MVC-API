@@ -1,0 +1,9 @@
+package com.app.web.servicio;
+
+import com.app.web.DTO.RegistroUsuarioDTO;
+import com.app.web.entidad.Usuario;
+
+public interface UsuarioServicio {
+
+	public Usuario guardarUsuario(RegistroUsuarioDTO dto);
+}

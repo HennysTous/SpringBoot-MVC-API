@@ -1,0 +1,9 @@
+package com.app.web.servicio;
+
+
+import com.app.web.entidad.Usuario;
+
+public interface UsuarioServicio {
+
+	Usuario encontrarPorEmail(String email);
+}

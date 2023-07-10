@@ -1,0 +1,16 @@
+package com.app.web.repositorio;
+
+
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.app.web.entidad.Asignatura;
+
+import jakarta.persistence.EntityManager;
+
+@Repository
+public class AsignaturaRepositorio extends JpaRepository<Asignatura, Integer>{
+
+	
+
+}

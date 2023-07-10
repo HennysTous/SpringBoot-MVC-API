@@ -1,0 +1,8 @@
+package com.app.web.entidad;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Asignatura {
+
+}

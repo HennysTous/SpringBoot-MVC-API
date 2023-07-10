@@ -1,0 +1,14 @@
+package com.app.web.servicio;
+
+
+import java.util.List;
+
+import com.app.web.entidad.Asignatura;
+import com.app.web.entidad.Usuario;
+
+public interface UsuarioServicio {
+	
+	public List<Usuario> encontrarUsuarioPorEmailYRespuesta (String email, String respuesta);
+	
+	public List<Usuario> encontrarUsuarioPorEmailYContrasena (String email, String pass);
+}

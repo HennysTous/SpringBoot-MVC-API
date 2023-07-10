@@ -1,0 +1,122 @@
+package com.app.web.controlador;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.tags.Param;
+
+import com.app.web.entidad.Asignatura;
+import com.app.web.entidad.Usuario;
+import com.app.web.servicio.AsignaturaServicio;
+import com.app.web.servicio.UsuarioServicio;
+
+@Controller
+public class AsignaturaControlador {
+
+	@Autowired
+	private AsignaturaServicio servicio;
+
+	@Autowired
+	private UsuarioServicio usuarioServicio;
+
+	@GetMapping({"/login","/"})
+	public String index(Model modelo) {
+		return "login";
+	}
+	
+	@PostMapping("/logear")
+	public String loginDeUsuario(Model modelo, String email, String pass) {
+
+		List<Usuario> usuariosExistentes = usuarioServicio.listarTodosLosUsuarios();
+		
+		List<Usuario> usuario = usuarioServicio.encontrarUsuarioPorEmailYContrasena(email, pass);
+		
+		if (usuario != null) {
+
+			modelo.addAttribute("usuario", usuario);
+
+			return "redirect:/asignaturas";
+
+		} else {
+
+			modelo.addAttribute("mensaje", "Email o Contraseña incorrecta");
+			
+			return "redirect:/login";
+		}
+
+	}
+
+	@GetMapping("/recoverypass")
+	public String recoveryDeUsuario(Model modelo, String email, String respuesta) {
+
+		modelo.addAttribute("recoverypass", usuarioServicio.encontrarUsuarioPorEmailYRespuesta(email, respuesta));
+
+		return "recoverypass";
+	}
+
+	@GetMapping("/asignaturas")
+	public String listarAsignaturas(Model modelo, String filtrar) {
+
+		if (filtrar != null) {
+
+			modelo.addAttribute("asignaturas", servicio.filtrarAsignaturaPorNombre(filtrar));
+
+		} else {
+
+			modelo.addAttribute("asignaturas", servicio.listarTodasLasAsignaturas());
+
+		}
+
+		return "asignaturas";
+	}
+
+	@GetMapping("/asignaturas/nuevo")
+	public String mostrarFormularioDeRegistrarAsignatura(Model modelo) {
+		Asignatura asignatura = new Asignatura();
+		modelo.addAttribute("asignatura", asignatura);
+		return "crear_asignatura";
+	}
+
+	@PostMapping("/asignaturas")
+	public String guardarAsignatura(@ModelAttribute("asignatura") Asignatura asignatura) {
+		servicio.guardarAsignatura(asignatura);
+		return "redirect:/asignaturas";
+	}
+
+	@GetMapping("/asignaturas/editar/{id}")
+	public String mostrarFormularioDeEditar(@PathVariable Integer id, Model modelo) {
+		modelo.addAttribute("asignatura", servicio.obtenerAsignaturaPorId(id));
+		return "editar_asignatura";
+	}
+
+	@PostMapping("/asignaturas/{id}")
+	public String actualizarAsignatura(@PathVariable Integer id, @ModelAttribute("asignatura") Asignatura asignatura,
+			Model modelo) {
+		Asignatura asignaturaExistente = servicio.obtenerAsignaturaPorId(id);
+		asignaturaExistente.setId(id);
+		asignaturaExistente.setNombre(asignatura.getNombre());
+		asignaturaExistente.setNombreCompleto(asignatura.getNombreCompleto());
+		asignaturaExistente.setDescripcion(asignatura.getDescripcion());
+		asignaturaExistente.setAreaConocimiento(asignatura.getAreaConocimiento());
+		asignaturaExistente.setCarrera(asignatura.getCarrera());
+		asignaturaExistente.setCreditos(asignatura.getCreditos());
+		asignaturaExistente.setContenidoTematico(asignatura.getContenidoTematico());
+		asignaturaExistente.setSemestre(asignatura.getSemestre());
+		asignaturaExistente.setProfesor(asignatura.getProfesor());
+
+		servicio.actualizarAsignatura(asignaturaExistente);
+		return "redirect:/asignaturas";
+	}
+
+	@GetMapping("/asignaturas/{id}")
+	public String eliminarAsignatura(@PathVariable Integer id) {
+		servicio.eliminarAsignatura(id);
+		return "redirect:/asignaturas";
+	}
+}

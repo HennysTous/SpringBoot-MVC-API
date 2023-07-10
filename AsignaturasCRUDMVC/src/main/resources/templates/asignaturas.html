@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Listado de asignaturas</title>
+<!-- CSS only -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#"> Asignaturas</a>
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/asignaturas}">Lista de Asignaturas</a></li>
+			</ul>
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/cerrarsesion}">Cerrar sesion</a></li>
+			</ul>
+		</div>
+	</nav>
+
+
+	<div class="container">
+		<div class="row">
+			<h1>Lista de asignaturas</h1>
+		</div>
+		<div class="row">
+		   <div class="col-lg-3">
+		     <form th:action="@{/asignaturas}" method="GET">
+				 <input id="txtFiltrar" type="text" name="filtrar">
+				 <button type="submit" class="btn btn-primary btn-sm mb3">Filtrar</button>
+			 </form>
+		   </div>
+		</div>
+		<div class="row">
+		   <div class="col-lg-3">
+		     <a th:href="@{/asignaturas/nuevo}" class="btn btn-primary btn-sm mb3">Agregar asignaturas</a>
+		   </div>
+		</div>
+		
+		<br>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>Nombre</th>
+					<th>Nombre Completo</th>
+					<th>Descripcion</th>
+					<th>Area de Conocimiento</th>
+					<th>Carrera</th>
+					<th>Creditos</th>
+					<th>Contenido Tematico</th>
+					<th>Semestre</th>
+					<th>Profesor</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="asignaturas : ${asignaturas}">
+					<td th:text="${asignaturas.nombre}">Nombre</td>
+					<td th:text="${asignaturas.nombreCompleto}">Nombre Completo</td>
+					<td th:text="${asignaturas.descripcion}">Descripcion</td>
+					<td th:text="${asignaturas.areaConocimiento}">Area de Conocimiento</td>
+					<td th:text="${asignaturas.carrera}">Carrera</td>
+					<td th:text="${asignaturas.creditos}">Creditos</td>
+					<td th:text="${asignaturas.contenidoTematico}">Contenido Tematico</td>
+					<td th:text="${asignaturas.semestre}">Semestre</td>
+					<td th:text="${asignaturas.profesor}">Profesor</td>
+					
+					<td>
+					  <a th:href="@{/asignaturas/editar/{id}(id=${asignaturas.id})}" class="btn btn-info">Editar</a>
+					  <a th:href="@{/asignaturas/{id}(id=${asignaturas.id})}" class="btn btn-danger">Eliminar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

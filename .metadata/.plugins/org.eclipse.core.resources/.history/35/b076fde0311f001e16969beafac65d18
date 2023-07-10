@@ -1,0 +1,22 @@
+package com.app.web.controlador;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.app.web.servicio.AsignaturaServicio;
+
+@RestController
+public class AsignaturaControlador {
+
+	@Autowired
+	private AsignaturaServicio servicio;
+	
+	@GetMapping("/asignaturas")
+	public String listarAsignaturas(Model modelo) {
+		modelo.addAttribute("asignaturas", servicio.listarTodasLasAsignaturas());
+		return "asignaturas";
+	}
+}

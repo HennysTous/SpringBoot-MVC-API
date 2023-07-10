@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Editar asignatura</title>
+<!-- CSS only -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#"> Asignaturas</a>
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/asignaturas}">Lista de Asignaturas</a></li>
+			</ul>
+		</div>
+	</nav>
+
+    <br>
+    <div class="container">
+       <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+              <h1 class="text-center">Edición de estudiante</h1>
+              <div class="card-body">
+                 <form th:action="@{/asignaturas/{id}(id=${asignatura.id})}" th:object="${asignatura}" method="POST">
+                    <div class="form-group">
+                       <label>Nombre : </label>
+                       <input type="text" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Digite el nombre : " required>
+                    </div>
+                    
+                    <div class="form-group">
+                       <label>Nombre Completo : </label>
+                       <input type="text" name="nombreCompleto" th:field="*{nombreCompleto}" class="form-control" placeholder="Digite el nombre completo : " required>
+                    </div>
+                    
+                    <div class="form-group">
+                       <label>Descripcion : </label>
+                       <input type="text" name="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Digite la descripcion : " required>
+                    </div>
+                   <div class="form-group">
+                       <label>Area de Conocimiento : </label>
+                       <input type="text" name="areaConocimiento" th:field="*{areaConocimiento}" class="form-control" placeholder="Digite el area de conocimiento : " required>
+                    </div>
+                    
+                    <div class="form-group">
+                       <label>Carrera : </label>
+                       <input type="text" name="carrera" th:field="*{carrera}" class="form-control" placeholder="Digite la carrera : " required>
+                    </div>
+                    
+                    <div class="form-group">
+                       <label>Creditos : </label>
+                       <input type="text" name="creditos" th:field="*{creditos}" class="form-control" placeholder="Digite los creditos : " required>
+                    </div>
+                    <div class="form-group">
+                       <label>Contenido Tematico : </label>
+                       <input type="text" name="contenidoTematico" th:field="*{contenidoTematico}" class="form-control" placeholder="Digite el contenido tematico : " required>
+                    </div>
+                    
+                    <div class="form-group">
+                       <label>Semestre : </label>
+                       <input type="text" name="semestre" th:field="*{semestre}" class="form-control" placeholder="Digite el semestre : " required>
+                    </div>
+                    
+                    <div class="form-group">
+                       <label>Profesor : </label>
+                       <input type="text" name="profesor" th:field="*{profesor}" class="form-control" placeholder="Digite el nombre del profesor : " required>
+                    </div>
+                    
+                    <div class="box-footer">
+                       <button class="btn btn-success">Guardar</button>
+                    </div>
+                 </form>
+              </div>
+          </div>
+       </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+package com.app.web.DTO;
+
+
+
+public class RegistroUsuarioDTO {
+
+	
+    private Integer cc;
+  
+    private String pass;
+    
+    private String nombre;
+    
+    private String apellido;
+    
+    private String genero;
+    
+    private String email;
+    
+    private String respuesta;
+}
