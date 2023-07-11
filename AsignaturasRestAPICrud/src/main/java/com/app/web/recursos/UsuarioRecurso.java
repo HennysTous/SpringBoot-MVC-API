@@ -29,13 +29,13 @@ public class UsuarioRecurso {
 		return usuarioRepositorio.findAll();
 	}
 	
-	@GetMapping("api/usuarios/find/{cc}")
-	public Usuario encontrarPorCc(@RequestBody Usuario usuario ,@PathVariable Integer cc){
+	@GetMapping("api/usuarios/findbycc/{cc}")
+	public Usuario encontrarPorCc(@PathVariable Integer cc){
 		return usuarioRepositorio.findById(cc).get();
 	}
 	
-	@GetMapping("api/usuarios/find/{nombre}")
-	public List<Usuario> encontrarPorNombre(@RequestBody Usuario usuario ,@PathVariable String nombre){
+	@GetMapping("api/usuarios/findbyname/{nombre}")
+	public List<Usuario> encontrarPorNombre(@PathVariable String nombre){
 		return usuarioRepositorio.filtrarPorNombre(nombre);
 	}
 	

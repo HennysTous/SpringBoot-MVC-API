@@ -27,13 +27,13 @@ public class AsignaturaRecurso {
 		return asignaturaRepositorio.findAll();
 	}
 	
-	@GetMapping("api/asignaturas/find/{id}")
-	public Asignatura encontrarPorID(@RequestBody Asignatura asignatura ,@PathVariable Integer id){
+	@GetMapping("api/asignaturas/findbyid/{id}")
+	public Asignatura encontrarPorID(@PathVariable Integer id){
 		return asignaturaRepositorio.findById(id).get();
 	}
 	
-	@GetMapping("api/asignaturas/find/{nombre}")
-	public List<Asignatura> encontrarPorNombre(@RequestBody Asignatura asignatura ,@PathVariable String nombre){
+	@GetMapping("api/asignaturas/findbyname/{nombre}")
+	public List<Asignatura> encontrarPorNombre(@PathVariable String nombre){
 		return asignaturaRepositorio.filtrarPorNombre(nombre);
 	}
 	
