@@ -44,7 +44,7 @@ public class UsuarioRecurso {
 		return usuarioRepositorio.save(usuario);
 	}
 	
-	@PutMapping("api/usuarios/edit/{id}")
+	@PutMapping("api/usuarios/edit/{cc}")
 	public Usuario actualizarUsuario(@RequestBody Usuario usuario ,@PathVariable Integer cc){
 		Usuario usuarioExistente = usuarioRepositorio.findById(cc).get();
 		usuarioExistente.setCc(cc);
@@ -59,7 +59,7 @@ public class UsuarioRecurso {
 		return usuarioRepositorio.save(usuarioExistente);
 	}
 	
-	@DeleteMapping("api/usuarios/remove/{id}")
+	@DeleteMapping("api/usuarios/remove/{cc}")
 	public void eliminarUsuario(@PathVariable Integer cc) {
 		usuarioRepositorio.deleteById(cc);
 	}
